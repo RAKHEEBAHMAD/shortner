@@ -1,0 +1,144 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family:Arial, Helvetica, sans-serif;
+  background-color: #f2f2f2;
+}
+
+
+h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+  background-color: #303088;
+  padding: 1rem;
+  color: #fff;
+}
+
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+input[type="text"] {
+  padding: 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  width: 60%;
+  font-size: 1rem;
+  color: #333;
+}
+
+.shrink-btn {
+  padding: 1rem 2rem;
+  background-color: #303088;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+table {
+  width: 800px;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  table-layout: fixed;
+  word-break: break-all;
+}
+
+thead {
+  background-color: #303088;
+  color: #fff;
+}
+
+th {
+  text-align: center;
+  padding: 1rem;
+}
+
+td {
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+td a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  color: #20262d;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navbar{
+  background-color: #303088;
+}
+/* .navbar a , .navbar a:hover,.navbar a:link,.navbar-brand a:link,.navbar-brand a:hover{
+  color: white;
+} */
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+.error-message::before{
+  font-family: Poppins,sans-serif;
+  content: "*";
+  color: red;
+  margin: 0;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.card {
+  width: 300px;
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.card-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  margin-bottom: 10px;
+}
+
+
+
+
+
+.del-form{
+  display: flex;
+  justify-content: start;
+}
+
+.short-link a{
+  color: #303088;
+  font-weight: 650;
+}
+
