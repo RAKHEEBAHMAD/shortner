@@ -67,24 +67,3 @@ copyButtons.forEach((button) => {
     }, 2000);
   });
 });
-
-
-var loadingInterface = document.getElementById('loading-interface');
-    var loadStart = new Date().getTime();
-
-    function displayLoadingInterface() {
-      loadingInterface.style.display = 'flex';
-    }
-
-    function hideLoadingInterface() {
-      loadingInterface.style.display = 'none';
-    }
-
-    window.addEventListener('load', function() {
-      var loadTime = new Date().getTime() - loadStart;
-      if (loadTime >= 5000) {
-        displayLoadingInterface();
-      } else {
-        hideLoadingInterface();
-      }
-    });
