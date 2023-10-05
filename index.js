@@ -23,7 +23,7 @@ const forgotpassword_otp = {}
 app.use(methodOverride("_method"));
 app.use(express.static(__dirname + '/public'));
 app.set("view engine", "ejs");
-app.set("views", "../SHORTNER/views");
+app.set("views", path.join(__dirname+"/views"));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieparser());
 app.use(express.json());
