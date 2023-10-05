@@ -29,7 +29,7 @@ app.use(cookieparser());
 app.use(express.json());
  
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect("mongodb+srv://rakheeb1905:rakheeb143@shortner.9b16fpt.mongodb.net/?retryWrites=true&w=majority")
   .then(() => {
     console.log("db connected");
   })
@@ -38,8 +38,9 @@ mongoose
   });
 
 
+
 app.get("/signup",isauthenticated(), (req, res) => {
-  res.render("signup.ejs", { error: null });
+  return res.render("signup.ejs", { error: null });
 });
 
 app.get("/login",isauthenticated(), (req, res) => {
