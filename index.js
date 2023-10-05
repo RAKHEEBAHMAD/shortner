@@ -48,7 +48,7 @@ app.get("/login",isauthenticated(), (req, res) => {
 });
 
 app.get('/',isauthenticated(),(req,res)=>{
-  return res.render('home')
+  return res.render('home.ejs')
 })
 
 app.get('/forgotpassword',(req,res)=>{
