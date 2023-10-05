@@ -29,7 +29,7 @@ app.use(cookieparser());
 app.use(express.json());
  
 mongoose
-  .connect("mongodb+srv://rakheeb1905:rakheeb143@shortner.9b16fpt.mongodb.net/?retryWrites=true&w=majority")
+  .connect(process.env.MONGO_URL)
   .then(() => {
     console.log("db connected");
   })
