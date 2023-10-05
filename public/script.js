@@ -23,24 +23,6 @@ searchForm.addEventListener("input", function () {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const copyButtons = document.querySelectorAll(".copy-btn");
 
 copyButtons.forEach((button) => {

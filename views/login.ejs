@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .red{
+            margin-bottom: 10px;
+            color: red;
+        }
+        .account a{
+            text-decoration: none;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Login</h1>
+    <div class="container">
+        <form action="/user/login" method="POST">
+            <% if (error && error !== '') { %>
+                <div class="red"><%= error %></div>
+            <% } %>
+            <label for="email">Enter Email: </label>
+            <input type="email" name="email" id="email" required>
+            <label for="password">Enter Password: </label>
+            <input type="password" name="password" id="password" required>
+            <input type="checkbox" name="show" id="show" onclick="showpassword()">
+            <label for="show">showpassword</label></br></br>
+            <button type="submit">Submit</button>
+            <div class="account"><a href="/signup" target="_self">Don't Have an Account?</a></div>
+        </form>
+    </div>
+    <div class="account"><a href="/forgotpassword">Forgot Password?</a></div>
+    <script>
+        function showpassword()
+        {
+            const showpass = document.getElementById('password')
+            if(showpass.type=='password'){
+                showpass.type='text'
+            }else{
+                showpass.type='password'
+            }
+        }
+    </script>
+</body>
+</html>

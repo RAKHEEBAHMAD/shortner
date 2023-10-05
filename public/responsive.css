@@ -1,0 +1,44 @@
+/* nav-bar responsive */
+.right-nav{
+    width: 50%;
+    height: 100vh;
+    position: absolute;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    right:100%;
+    transition: all 1s;
+    background-color: #1f1f38;
+}
+#check{
+    display: none;
+}
+.checkbtn{
+    display: block;
+}
+#check:checked~.right-nav{
+    right: 50%;
+}
+
+
+
+
+/* Home page responsive */
+.hero .right-side img{
+    margin-left:30px
+} 
+.hero .left-side{
+    width: 100%;
+}
+.left-side h1, h6, h3{
+    letter-spacing: 0px;
+}
+.left-side h6,h3{
+    font-size: 1.2rem;
+}
+
+
+/* About section responsive */
+.about-container img{
+    width: 350px;
+}
