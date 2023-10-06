@@ -12,30 +12,35 @@
 <body>
 
   <%- include('nav.ejs',{user:null}) %>
-  
-  <div class="generate-link">
-    <% if (error) { %>
-      <p class="error">*<%= error %></p>
-     <% } %>
-    <form action="/url" method="POST">
-      <input type="text" name="fullurl" id="fullurl" class="input">
-      <button type="submit" class="generate-btn">GO</button>
-    </form>
-  </div>
 
-  <% urls.forEach((shortUrl, index)=> { %>
-    <div class="link-card">
-      <h2><a href="<%= shortUrl.full %>" class="full-link"><%= shortUrl.full %></a></h2>
-      <h4 class="short-link">Short Link: <a href="/url/<%= shortUrl.short %>"><%= host + '/' + shortUrl.short %></a></h4>
-      <p class="clicks">Clicks: <span><%= shortUrl.clicks %></span></p>
-      <form action="/url/<%= shortUrl._id %>?_method=DELETE" method="post" class="del-form">
-          <button class="delete-button" type="submit">Delete</button>
-      </form>
+    <div class="generate-link">
+      <% if (error) { %>
+        <p class="error">*<%= error %>
+        </p>
+        <% } %>
+          <form action="/url" method="POST">
+            <input type="text" name="fullurl" id="fullurl" class="input">
+            <button type="submit" class="generate-btn">GO</button>
+          </form>
     </div>
-  <% }) %>
 
-
-    <script src="script.js"></script>
+    <% urls.forEach((shortUrl, index)=> { %>
+      <div class="link-card">
+        <h2><a href="<%= shortUrl.full %>" class="full-link">
+            <%= shortUrl.full %>
+          </a></h2>
+        <h4 class="short-link">Short Link: <a href="/url/<%= shortUrl.short %>">
+            <%= host + '/' + shortUrl.short %>
+          </a></h4>
+        <p class="clicks">Clicks: <span>
+            <%= shortUrl.clicks %>
+          </span></p>
+        <form action="/url/<%= shortUrl._id %>?_method=DELETE" method="post" class="del-form">
+          <button class="delete-button" type="submit">Delete</button>
+        </form>
+      </div>
+      <% }) %>
+        
 </body>
 
 </html>

@@ -36,10 +36,12 @@ const generateAndSendOTP = async (user,temp_otp) => {
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.error("Error sending OTP email:", error);
+        return
       }
     });
   } catch (err) {
     console.error("Error generating OTP:", err);
+    return
   }
   return
 };

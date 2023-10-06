@@ -94,7 +94,6 @@ app.post("/url",validtoken(), async (req, res) => {
   // );
   const { fullurl } = req.body;
   const {email} =req.user;
-  console.log(req.user)
   const user = await authmodel.findOne({email})
   if (validUrl.isWebUri(fullurl)) {
     try {
@@ -173,7 +172,6 @@ app.post('/user/login', async (req, res) => {
     if (!checkpassword) {
       return res.render("login", { error: "incorrect credentials" });
     }
-    console.log(user)
     const accesstoken = await jwt.sign(
       {
         username: user.username,
@@ -211,10 +209,8 @@ app.post('/forgotpassword',async(req,res)=>{
   {
     return res.status(400).render('forgot_password',{error:"Email Not Exist"})
   }
-  console.log('i am here')
   const hashedpassword = await bcrypt.hash(password,10)
   await authmodel.updateOne({email},{$set:{password:hashedpassword}})
-  console.log('password changed')
   return res.redirect('/')
 })
 
@@ -263,8 +259,9 @@ app.post('/sendotp', async (req, res) => {
 });
 
 app.get('/deleteaccount',validtoken(),async(req,res)=>{
-  const {email} = req.user
-  const x = await authmodel.deleteOne({email})
+  const {email,createdBy} = req.user
+  const deletedone = await authmodel.deleteOne({email})
+  const deleteurls = await model.deleteMany({createdBy})
   return res.redirect('/logout')
 })
 
@@ -275,5 +272,3 @@ app.get('*', function(req, res){
 app.listen(PORT, () => {
   console.log(`listening to ${PORT}`);
 });
-
-console.log(__dirname)
