@@ -56,7 +56,7 @@
             border-radius: 5px;
         }
 
-        button[type="submit"] {
+        button {
             background-color: #007BFF;
             color: #fff;
             border: none;
@@ -107,7 +107,7 @@
 <body>
     <h1>Signup</h1>
     <div class="container">
-        <form action="/user/signup" method="POST">
+        <form >
             <% if (error) { %>
                 <p class="red" id="red">
                     <%= error %>
@@ -130,7 +130,7 @@
                     <div class="red" id="check"></div>
                     <input type="checkbox" name="show" id="show" onclick="showpassword()">
                     <label for="show">showpassword</label></br></br>
-                    <button type="submit">Submit</button>
+                    <button type="button" id="submit">Submit</button>
                     <div class="account"><a href="/login" target="_self">Already Have an Account?</a></div>
         </form>
     </div>
@@ -178,6 +178,11 @@
                 .then(data => {
                     const clientmsg = document.getElementById('msg')
                     clientmsg.textContent = data.msg
+                    console.log(data)
+                    if(!msg)
+                    {
+                        window.location.href='/mylinks'
+                    }
                 })
         })
 
@@ -230,6 +235,34 @@
             }
         });
 
+        document.getElementById('submit').addEventListener('click', () => {
+            const otp = document.getElementById('OTP').value
+            const email = document.getElementById('email').value
+            const name = document.getElementById('username').value
+            const password = document.getElementById('password').value
+            console.log(" iam in fetch")
+            fetch('/user/signup',
+                {
+                    method: "POST",
+                    body: JSON.stringify({
+                        "username": `${name}`,
+                        "email": `${email}`,
+                        "password": `${password}`,
+                        "OTP": `${otp}`
+                    }),
+                    headers: { 'Content-Type': 'application/json' }
+                }
+            ).then(response => response.json())
+                .then(data => {
+                    if(data.msg=="successfull"){
+                        window.location.href='/mylinks'
+                        return
+                    }
+                    const clientmsg = document.getElementById('msg')
+                    clientmsg.textContent = data.msg
+                })
+        })
+        
 
     </script>
 </body>

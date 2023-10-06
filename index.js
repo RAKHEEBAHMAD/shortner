@@ -131,17 +131,19 @@ app.post('/user/signup', async (req, res) => {
   const pattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
   if(registration_otp[email]?.otp!=OTP)
   {
-    return res.status(500).render("signup", { error: "OTP is invalid!" });
+    return res.json({msg:"OTP is invalid"});
   }
+  
   if(!password.match(pattern))
   {
-    return res.status(500).render("signup", { error: "Min 8 characters,least 1 uppercase letter and 1 lowercase letter and 1 number and 1 special character" });
+    return res.json({ msg: "Min 8 characters,least 1 uppercase letter and 1 lowercase letter and 1 number and 1 special character" })
   }
+  
   const hashedpassword = await bcrypt.hash(password, 10);
   try {
     const user = await authmodel.findOne({ email });
     if (user) {
-      return res.status(500).render("signup", { error: "User already exists" });
+      return res.json({ msg: "User already exists" })
     }
     const newuser = await authmodel.create({
       // _id: new mongoose.Types.ObjectId(),
@@ -151,7 +153,7 @@ app.post('/user/signup', async (req, res) => {
       userid: userscount+1
     });
     req.user = newuser
-    return res.redirect('/login');
+    return res.json({msg:"successfull"});
   } catch (err) {
     console.log(err);
     return res.send(err);
@@ -220,6 +222,7 @@ app.post('/sendotp', async (req, res) => {
   if(type=='new')
   {
     const checkexist = await authmodel.findOne({email})
+    console.log(checkexist)
     if(checkexist)
     {
       return res.status(400).json({msg: "Email Already Exist"})
