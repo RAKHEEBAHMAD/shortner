@@ -259,11 +259,13 @@ app.post('/sendotp', async (req, res) => {
 });
 
 app.get('/deleteaccount',validtoken(),async(req,res)=>{
-  const {email,createdBy} = req.user
+  const {email,userid} = req.user
   const deletedone = await authmodel.deleteOne({email})
-  const deleteurls = await model.deleteMany({createdBy})
+  const deleteurls = await model.deleteMany({createdBy:userid})
   return res.redirect('/logout')
 })
+
+
 
 app.get('*', function(req, res){
   res.sendFile(path.join(__dirname+'/public','/404.html'));
