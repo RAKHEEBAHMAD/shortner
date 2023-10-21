@@ -15,10 +15,8 @@ function validtoken() {
         return res.redirect("/login");
       }
       req.user = decoded;
-      console.log(decoded)
       next()
     } catch (error) {
-      console.log(error);
       res.redirect('back')
     }
   };

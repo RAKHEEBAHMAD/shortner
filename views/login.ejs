@@ -81,11 +81,12 @@
             color: green;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <h1>Login</h1>
     <div class="container">
-        <form action="/user/login" method="POST">
+        <form>
             <% if (error && error !== '') { %>
                 <div class="red"><%= error %></div>
             <% } %>
@@ -95,11 +96,12 @@
             <input type="password" name="password" id="password" required>
             <input type="checkbox" name="show" id="show" onclick="showpassword()">
             <label for="show">showpassword</label></br></br>
-            <button type="submit">Submit</button>
+            <button type="submit" id="submit">Submit</button>
             <div class="account"><a href="/signup" target="_self">Don't Have an Account?</a></div>
         </form>
     </div>
     <div class="account"><a href="/forgotpassword">Forgot Password?</a></div>
+    
     <script>
         function showpassword()
         {
@@ -110,6 +112,82 @@
                 showpass.type='password'
             }
         }
+
+
+        document.getElementById('submit').addEventListener('click', () => {
+            event.preventDefault();
+            const email = document.getElementById('email').value
+            const password = document.getElementById('password').value
+            fetch('/user/login',
+                {
+                    method: "POST",
+                    body: JSON.stringify({
+                        "email": `${email}`,
+                        "password": `${password}`,
+                    }),
+                    headers: { 'Content-Type': 'application/json' }
+                }
+            ).then(response => response.json())
+                .then(data => {
+                    if (data.msg == "successfull") {
+                        window.location.href = '/mylinks?login=success'
+                        return
+                    }
+                    // const clientmsg = document.getElementById('msg')
+                    // clientmsg.textContent = data.msg
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({
+                        icon: 'error',
+                        title: data.msg
+                    })
+
+                })
+        })
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const signupStatus = urlParams.get('signup')
+            if (signupStatus == 'success') {
+              // Display the success Swal notification
+              const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+
+              Toast.fire({
+                icon: 'success',
+                title: 'Registration successfull'
+              })
+            } 
+          });
+
+
+
+
+
+
+
+
     </script>
 </body>
 </html>
